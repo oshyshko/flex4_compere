@@ -7,9 +7,11 @@ public class Compere {
     private var container:UIComponent;
     private var current:UIComponent
 
-    public function Compere(container:UIComponent, current:UIComponent) {
-        this.container = container;
+    public function Compere(container:UIComponent, current:UIComponent, introduceCurrent:Boolean=true) {
+        this.container = container
         this.current = current
+
+        if (introduceCurrent) reshowCurrent()
     }
 
     public function show(toCurrent:UIComponent):void {
@@ -18,18 +20,22 @@ public class Compere {
         // TODO will creation of this anon-function produce a memory leak?
         const onHidden:Function = function (e:FlexEvent):void {
             current.removeEventListener(FlexEvent.STATE_CHANGE_COMPLETE, onHidden)
-            toCurrent.currentState = 'hidden'
+            current = toCurrent
+
             container.currentState = toCurrent.id
 
-            container.callLater(function ():void {
-                toCurrent.currentState = 'normal'
-                current = toCurrent
-            })
+            reshowCurrent()
         }
 
         current.addEventListener(FlexEvent.STATE_CHANGE_COMPLETE, onHidden)
         current.currentState = 'hidden'
     }
 
+    public function reshowCurrent():void {
+        current.currentState = 'hidden'
+        container.callLater(function():void {
+            current.currentState = 'normal'
+        })
+    }
 }
 }
