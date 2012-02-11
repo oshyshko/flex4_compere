@@ -16,7 +16,7 @@
 
     <s:VGroup>
         <s:HGroup width="100%">
-            <!-- TODO if possible, use states insted -->
+            <!-- TODO if possible, use states instead of ids -->
             <s:Button label="Switch to animals" click="{compere.show(animals)}"/>
             <s:Button label="Switch to birds"   click="{compere.show(birds)}"/>
             <s:Button label="Switch to frogs"   click="{compere.show(frogs)}"/>
