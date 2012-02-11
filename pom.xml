@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>compere</groupId>
+    <artifactId>compere</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>swf</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <flexmojos.version>4.0-beta-7</flexmojos.version>
+        <flex.sdk.version>4.5.1.21328</flex.sdk.version>
+        <flash.version>11.0.0</flash.version>
+
+        <downloadSources>true</downloadSources>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flexmojos.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <configurationReport>true</configurationReport>
+                    <locales>
+                        <locale>en_US</locale>
+                    </locales>
+                    <debug>true</debug>
+                    <!--<skipTests>true</skipTests>-->
+                    <targetPlayer>${flash.version}</targetPlayer>
+                    <swfVersion>11</swfVersion>
+                    <optimize>true</optimize>
+                    <compilerWarnings>
+                        <warn-no-constructor>false</warn-no-constructor>
+                    </compilerWarnings>
+
+                    <configuration>
+                        <sourceFile>Main.mxml</sourceFile>
+                    </configuration>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${flex.sdk.version}</version>
+                        <type>pom</type>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>afe</artifactId>
+                        <version>${flex.sdk.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>com.intellij.flex.maven</groupId>
+                <artifactId>idea-flexmojos-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>flexmojos</id>
+            <url>https://repository.sonatype.org/content/groups/flexgroup/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>flexmojos</id>
+            <url>https://repository.sonatype.org/content/groups/flexgroup/</url>
+            <!--<url>http://repository.opencastproject.org/nexus/content/groups/public/</url>-->
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>flyti</id>
+            <url>http://repository.flyti.org/</url>
+        </pluginRepository>
+
+    </pluginRepositories>
+
+
+</project>

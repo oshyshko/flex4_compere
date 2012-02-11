@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:local="*" creationComplete="{compere = new Compere(this, animals)}">
+
+    <fx:Script><![CDATA[
+        import util.Compere
+
+        private var compere:Compere
+        ]]></fx:Script>
+
+    <s:states>
+        <s:State name="animals"/>
+        <s:State name="birds"/>
+        <s:State name="frogs" />
+    </s:states>
+
+    <s:VGroup>
+        <s:HGroup width="100%">
+            <!-- TODO if possible, use states insted -->
+            <s:Button label="Switch to animals" click="{compere.show(animals)}"/>
+            <s:Button label="Switch to birds"   click="{compere.show(birds)}"/>
+            <s:Button label="Switch to frogs"   click="{compere.show(frogs)}"/>
+        </s:HGroup>
+
+        <s:Group width="100%" height="100%" clipAndEnableScrolling="true">
+            <!--
+                NOTE 1: should be equal:       id="someName" <-> includeIn="sameName"
+                NOTE 2: should be always set:  itemCreationPolicy="immediate"
+
+                TODO if possible:
+                TODO  - get rid of ids, use states only
+                TODO  - get rid of itemCreationPolicy="immediate" to enable memory saving
+            -->
+            <local:Animals id="animals" includeIn="animals" itemCreationPolicy="immediate" />
+            <local:Birds   id="birds"   includeIn="birds"   itemCreationPolicy="immediate" />
+            <local:Frogs   id="frogs"   includeIn="frogs"   itemCreationPolicy="immediate" />
+        </s:Group>
+    </s:VGroup>
+
+
+</s:Application>
